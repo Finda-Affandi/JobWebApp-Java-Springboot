@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+      <a th:href="@{/hr/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div class="one">
+        <div class="ui three column grid">
+          <div class="column">
+
+          </div>
+          <div class="column">
+            <h1 id="h1">Let's go find a job</h1>
+          </div>
+        </div>
+      </div>
+      <div class="two">
+          <div
+            id="openSidebar"
+            class="ui black vertical animated button"
+            tabindex="0">
+            <div class="visible content">
+              <i class="white bars icon" id="bar"></i>
+            </div>
+            <div class="hidden content">Menu</div>
+        </div>
+        <div class="space"></div>
+        <div class="ui container">
+          <th:block th:each="job : ${jobList}">
+            <div class="ui raised segment">
+              <h3 th:text="${job.position}"></h3>
+              <h5 th:text="${job.company}" id="company"></h5>
+              <p id="desc" th:text="${job.description}"></p>
+              <i class="map marker alternate icon" id="icon"></i>
+              <p th:text="${job.location}"></p>
+              <i class="clock solid icon" id="icon"></i>
+              <p th:text="${job.type}"></p>
+              <i class="money bill alternate icon" id="icon"></i>
+              <p
+                id="salary"
+                th:text="'Rp.' + ${job.minSalary} + ' - Rp.' + ${job.maxSalary}"></p>
+              <div class="ui blue animated button" tabindex="0" id="apply">
+                <div class="visible content">Apply</div>
+                <div class="hidden content">
+                  <i class="check circle outline icon"></i>
+                </div>
+              </div>
+              <br>
+            </div>
+          </th:block>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+    
+  </body>
+</html>
+
+<style>
+  body {
+    
+  }
+
+  .one {
+    margin-top: 0px;
+    background-color: #1b1c1d;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #openSidebar {
+    background-color: rgba(255, 255, 255, 0);
+    float: left;
+    position: fixed;
+    top: 18px;
+  }
+
+  #bar {
+    color: #1b1c1d;
+  }
+
+  #title {
+    margin-top: 2px;
+  }
+
+  .ui.container {
+    margin-top: 50px;
+  }
+
+  #h1 {
+    text-align: center;
+    font-size: 5em;
+    color: #ffffff;
+    margin-top: 40vh;
+  }
+
+  .space {
+    width: 100vw;
+    height: 10px;
+    margin-top: 30px;
+  }
+
+  #company {
+    margin-top: -10px;
+  }
+
+  #desc {
+    text-align: justify;
+  }
+
+  #icon {
+    float: left;
+  }
+
+  #salary {
+    float: left;
+  }
+
+  #apply {
+    margin-top: -20px;
+    float: right;
+  }
+
+  .footer {
+    height: 100px;
+  }
+</style>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

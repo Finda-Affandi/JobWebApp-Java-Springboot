@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" th:href="@{/css/auth.login.css}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="ui two column grid">
+      <div class="ui nine wide column" id="left">
+        <div class="ui image" id="image1">
+          <img th:src="@{/asset/2.png}" alt="" />
+        </div>
+      </div>
+      <div class="ui seven wide column" id="right">
+        <div class="ui raised segment" id="segment">
+          <h1 id="h1">Hello Welcome!</h1>
+          <p id="let">Let's find a suitable job and be around you</p>
+
+          <form class="ui form" method="get" th:action="@{/auth/doLogin}">
+            <div class="field">
+              <div class="ui large icon input" id="input">
+                <input type="text" placeholder="Username" name="username" />
+                <i class="user circle icon"></i>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui large icon input" id="input">
+                <input type="password" placeholder="Password" name="password" />
+                <i class="lock icon"></i>
+              </div>
+            </div>
+            <button class="ui button" type="submit" id="button">Enter</button>
+          </form>
+          <div class="signup">
+            <p id="dont">
+              Don't have an account yet?&nbsp;&nbsp;<a
+                id="a"
+                href="#"
+                onclick="openModal()"
+                ><b>Sign Up</b></a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui modal" id="modal">
+      <div class="header">Sign Up</div>
+      <div class="butt">
+        <!-- <a th:href="@{/auth/hrSignup}"><div id="btn" class="ui button">Hire Job</div></a>
+        <a th:href="@{/auth/userSignup}"><div id="btn" class="ui button">Apply Job</div></a> -->
+        <div class="ui special cards">
+          <div class="card" id="crd1">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <a th:href="@{/auth/hrSignup}"
+                      ><div class="ui inverted button">Sign Up</div></a
+                    >
+                  </div>
+                </div>
+              </div>
+              <img
+                src="https://semantic-ui.com/images/avatar2/large/kristy.png" />
+            </div>
+            <div class="content">
+              <a th:href="@{/auth/hrSignup}" class="header"
+                >Sign Up as Recruiter</a
+              >
+            </div>
+          </div>
+          <div class="card" id="crd2">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <a th:href="@{/auth/userSignup}"
+                      ><div class="ui inverted button">Sign Up</div></a
+                    >
+                  </div>
+                </div>
+              </div>
+              <img
+                src="https://semantic-ui.com/images/avatar2/large/matthew.png" />
+            </div>
+            <div class="content">
+              <a th:href="@{/auth/userSignup}" class="header"
+                >Sign Up as Job Seeker</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function openModal() {
+    $(".ui.modal").modal("show");
+  }
+
+  $("#crd1").hover(function () {
+    $(".special.cards .image").dimmer({ on: "hover" });
+  });
+
+  $("#crd2").hover(function () {
+    $(".special.cards .image").dimmer({ on: "hover" });
+  });
+</script>

@@ -1,0 +1,66 @@
+body {
+    background-color: #ffffff;
+  }
+
+  #left {
+    background-color: #3f4afa;
+    height: 105vh;
+  }
+
+  #image1 {
+    margin-top: -150px;
+    margin-left: 80px;
+    width: 1000px;
+    animation: fadeInDown; 
+    animation-duration: 2s;
+  }
+
+  #segment {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    height: 800px;
+    animation: fadeInUp; 
+    animation-duration: 2s;
+  }
+
+  #h1 {
+    margin-top: 10px;
+    color: #3f4afa;
+    text-align: center;
+  }
+
+  #let {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: -15px;
+  }
+
+  #input {
+    width: 500px;
+    padding-left: 60px;
+  }
+
+  #button {
+    background-color: #3f4afa;
+    color: #ffffff;
+    width: 440px;
+    margin-left: 60px;
+    margin-top: 10px;
+  }
+
+  .signup {
+    text-align: center;
+    margin-top: 35px;
+  }
+
+  #dont {
+  }
+
+  #a {
+    color: #3f4afa;
+  }

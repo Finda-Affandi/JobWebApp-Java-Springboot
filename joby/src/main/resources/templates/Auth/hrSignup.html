@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+            integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+            integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"/>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/auth.hrSignup.css}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="ui two column grid">
+      <div class="ui nine wide column" id="left">
+        <div class="ui image">
+          <img th:src="@{/asset/3.png}" id="image1" alt="">
+        </div>
+      </div>
+      <div class="ui seven wide column" id="right">
+        <div class="ui raised segment" id="segment">
+          <h1 id="h1">Let's Create Account!</h1>
+          <p id="let">Recruit thousands of employees for your beloved company</p>
+
+          <form class="ui form" method="post" id="formRegister" th:action="@{doHrSignup}" th:object="${user}">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{role}"/>
+            <div class="field" id="input">
+              <label>Full Name</label>
+              <input type="text" required="true" th:field="*{fullname}"/>
+            </div>
+            <div class="field" id="input">
+              <label>Phone</label>
+              <input type="text" required="true" th:field="*{phone}"/>
+            </div>
+            <div class="field" id="input">
+              <label>Company</label>
+              <input type="text" required="true" th:field="*{company}"/>
+            </div>
+            <div class="field" id="input">
+              <label>Position</label>
+              <input type="text" required="true" th:field="*{position}"/>
+            </div>
+            <div class="field" id="input">
+              <label>E-mail</label>
+              <input type="email" required="true" th:field="*{email}"/>
+            </div>
+            <div class="field" id="input">
+              <label>Username</label>
+              <input type="text" required="true" th:field="*{username}"/>
+            </div>
+            <div class="field" id="input">
+              <label>Password</label>
+              <input type="password" required="true" th:field="*{password}"/>
+            </div>
+            <br>
+            <button type="submit" class="ui button primary" id="button">Register</button>
+            <div class="signup">
+            <p id="dont">
+              Has an account?&nbsp;&nbsp;<a id="a" th:href="@{login}"
+                ><b>Log In</b></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

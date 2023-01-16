@@ -1,0 +1,47 @@
+body {
+}
+
+#sidebarMenu {
+    background-color: #212429;
+}
+
+#navBar {
+    background-color: #212429;
+}
+
+#openSidebar {
+  float: left;
+  background-color: #212429;
+  color: #ffffff;
+}
+
+#title {
+  margin-top: 2px;
+}
+
+#btn {
+  background-color: #3f4afa;
+  color: #ffffff;
+}
+
+.ui.container {
+  margin-top: 50px;
+}
+
+#hire {
+  margin-top: 5px;
+}
+
+#detail {
+  margin-top: -20px;
+  float: right;
+  background-color: #3f4afa;
+  color: #ffffff;
+}
+
+#profile {
+  margin-top: 14px;
+}
+
+#image {
+}

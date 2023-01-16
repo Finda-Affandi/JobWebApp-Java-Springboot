@@ -1,0 +1,149 @@
+  <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/hr.index.css}" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu" id="sidebarMenu">
+      <a th:href="@{/hr/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:href="@{/hr/applicant}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div class="ui inverted vertical masthead left aligned segment" id="navBar">
+        <div
+          id="openSidebar"
+          class="ui vertical animated button"
+          tabindex="0">
+          <div class="visible content">
+            <i class="white bars icon"></i>
+          </div>
+          <div class="hidden content">Menu</div>
+        </div>
+        <h2 id="title">&nbsp&nbsp&nbsp Home</h2>
+      </div>
+      <div class="ui container">
+        <div class="ui stackable two column grid">
+          <div class="twelve wide column">
+            <div class="ui raised segment">
+              <h3>Your Hire List</h3>
+              <table class="ui celled table">
+                <thead>
+                  <tr>
+                    <th>Position</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Applicant</th>
+                    <th>Manage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <th:block th:each="hire : ${hireList}">
+                    <tr>
+                      <td th:text="${hire.position}"></td>
+                      <td th:text="${hire.location}"></td>
+                      <td th:text="${hire.type}"></td>
+                      <td th:text="${hire.status}"></td>
+                      <td>23</td>
+                      <td>
+                        <a th:href="@{/hr/manage}">
+                          <div class="ui animated button" tabindex="0" id="btn">
+                            <div class="visible content">Manage</div>
+                            <div class="hidden content">
+                              <i class="cog icon"></i>
+                            </div>
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
+                  </th:block>
+                </tbody>
+              </table>
+              <a th:href="@{/hr/addJob}" id="hire">
+                <div class="ui animated button" tabindex="0" id="btn">
+                  <div class="visible content">
+                    <i class="user plus icon"></i>
+                  </div>
+                  <div class="hidden content">Hire</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="four wide coulumn">
+            <div class="ui raised segment" id="profile">
+              <h3>Profile</h3>
+              <img
+                class="ui small circular image"
+                src="https://semantic-ui.com/images/avatar2/small/matthew.png"
+                id="image" />
+            </div>
+          </div>
+          <div class="sixteen wide column">
+            <h2>Job List</h2>
+            <th:block th:each="job : ${jobList}">
+            <div class="ui raised segment">
+              <h3 th:text="${job.position}"></h3>
+              <h5 th:text="${job.company}" id="company"></h5>
+              <p id="desc" th:text="${job.description}"></p>
+              <i class="map marker alternate icon" id="icon"></i>
+              <p th:text="${job.location}"></p>
+              <i class="clock solid icon" id="icon"></i>
+              <p th:text="${job.type}"></p>
+              <i class="money bill alternate icon" id="icon"></i>
+              <p
+                id="salary"
+                th:text="'Rp.' + ${job.minSalary} + ' - Rp.' + ${job.maxSalary}"></p>
+              <div class="ui animated button" tabindex="0" id="detail">
+                <div class="visible content">Apply</div>
+                <div class="hidden content">
+                  <i class="check circle outline icon"></i>
+                </div>
+              </div>
+              <br>
+            </div>
+          </th:block>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

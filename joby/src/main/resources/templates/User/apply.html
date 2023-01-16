@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+      <a th:href="@{/auth/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:if="${myUser.role=='HR'}" th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:if="${myUser.role=='HR'}" th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:if="${myUser.role!=null}" th:href="@{/user/view}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div
+        id="headerMenu"
+        class="ui top inverted vertical masthead left aligned segment">
+        <div class="ui container" id="header">
+          <div class="ui fixed inverted secondary menu" id="navBar">
+            <div
+              id="openSidebar"
+              class="ui item black vertical animated button"
+              tabindex="0">
+              <div class="visible content">
+                <i class="white bars icon"></i>
+              </div>
+              <div class="hidden content">Menu</div>
+            </div>
+            <h2 class="header item">Apply</h2>
+            <div class="right menu">
+              <div th:if="${myUser.id!=null}" class="item">
+                <p th:text="${myUser.fullname}"></p>
+              </div>
+              <div th:if="${myUser.id!=null}" class="item">
+                <a th:href="@{/auth/logout}">
+                  <div class="ui animated button" tabindex="0" id="lgn">
+                    <div class="visible content">Log Out</div>
+                    <div class="hidden content">
+                      <i class="arrow alternate circle right outline icon"></i>
+                    </div></div
+                ></a>
+              </div>
+              <div th:if="${myUser.id==null}" class="item">
+                <a th:href="@{/auth/login}">
+                  <div class="ui animated button" tabindex="0" id="lgn">
+                    <div class="visible content">Login</div>
+                    <div class="hidden content">
+                      <i class="user icon"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui container body">
+        <div class="ui raised segment">
+          <div class="ui container" id="jobList">
+            <h1 th:text="${job.company}"></h1>
+            <p th:text="${job.type} + ' - ' + ${job.position}"></p>
+            <p th:text="'Salary : ' + ${job.salary}"></p>
+            <p th:text="'Location : ' + ${job.location}"></p>
+            <p th:text="${job.description}"></p>
+            <br />
+            <br />
+          </div>
+          <a th:href="@{/user/doApply(jobcode=${job.jobcode})}">
+            <div class="ui blue animated button" tabindex="0" id="apply">
+              <div class="visible content">Apply this job</div>
+              <div class="hidden content">
+                <i class="check icon"></i>
+              </div>
+            </div>
+          </a>
+          <a th:href="@{/auth/}">
+            <div class="ui blue animated button" tabindex="0" id="cancel">
+              <div class="visible content">Cancel</div>
+              <div class="hidden content">
+                <i class="close icon"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+        <br />
+        <br />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+  }
+
+  /* .masthead {
+    background-color: black !important;
+  } */
+
+  #navBar {
+    background-color: #212429;
+  }
+
+  #headerMenu {
+    color: black;
+    padding-top: 2px;
+    padding-bottom: 0px;
+  }
+
+  #openSidebar {
+    float: left;
+  }
+
+  #lgn {
+    background-color: #3f4afa;
+    color: #ffffff;
+  }
+
+  #header {
+    background: #212429;
+  }
+
+  #headerMenu {
+    margin-top: -100px;
+    padding-bottom: 0px;
+    background-color: #212429;
+    height: 100px;
+    animation: fadeIn;
+    animation-duration: 2s;
+  }
+
+  #title {
+    margin-top: 2px;
+  }
+
+  .ui.container.body {
+    margin-top: 120px;
+    animation: fadeInUp;
+    animation-duration: 2s;
+  }
+
+  #hire {
+    margin-top: 5px;
+  }
+
+  #profile {
+    margin-top: 14px;
+  }
+
+  #jobList {
+    margin-bottom: 10px;
+  }
+
+  #apply {
+    margin-top: -40px;
+    margin-right: 100px;
+    float: right;
+    background-color: #3f4afa;
+  }
+
+  #cancel {
+    margin-top: -40px;
+    float: right;
+    background-color: #3f4afa;
+  }
+</style>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

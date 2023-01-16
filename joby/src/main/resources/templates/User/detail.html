@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+      <a th:href="@{/auth/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:if="${myUser.role=='HR'}" th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:if="${myUser.role=='HR'}" th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:if="${myUser.role!=null}" th:href="@{/user/view}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div
+        id="headerMenu"
+        class="ui top inverted vertical masthead left aligned segment">
+        <div class="ui container black">
+          <div class="ui fixed inverted grey secondary menu">
+            <div
+              id="openSidebar"
+              class="ui item black vertical animated button"
+              tabindex="0">
+              <div class="visible content">
+                <i class="white bars icon"></i>
+              </div>
+              <div class="hidden content">Menu</div>
+            </div>
+            <h2 class="header item">Applicant</h2>
+            <div class="right menu">
+              <div th:if="${myUser.id!=null}" class="item">
+                <p th:text="${myUser.fullname}"></p>
+              </div>
+              <div th:if="${myUser.id!=null}" class="item">
+                <a class="ui inverted negative button" th:href="@{/auth/logout}"
+                  >Log Out</a
+                >
+              </div>
+              <div th:if="${myUser.id==null}" class="item">
+                <a class="ui inverted teal button" th:href="@{/auth/login}"
+                  >Login</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui container body">
+        <h3
+          class="header"
+          th:text="${job.company} + ' - ' + ${job.position}"></h3>
+        <div class="ui divider"></div>
+        <table class="ui striped table">
+          <thead>
+            <tr>
+              <th>Fullname</th>
+              <th>E-mail</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <th:block th:each="a : ${applicants}">
+              <tr class="top aligned">
+                <td th:text="${a.user.fullname}"></td>
+                <td th:text="${a.user.email}"></td>
+                <td th:text="${a.user.phone}"></td>
+                <td>
+                  <div th:if="${a.status=='Waiting'}" class="ui buttons fluid">
+                    <a
+                      th:href="@{'/user/recruit?id=' + ${a.id} + '&acceptance=Rejected'}"
+                      class="ui button negative"
+                      >Reject</a
+                    >
+                    <a
+                      th:href="@{'/user/recruit?id=' + ${a.id} + '&acceptance=Accepted'}"
+                      class="ui button primary"
+                      >Accept</a
+                    >
+                  </div>
+                  <p th:if="${a.status!='Waiting'}" th:text="${a.status}"></p>
+                </td>
+              </tr>
+            </th:block>
+          </tbody>
+        </table>
+        <br />
+        <br />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+  }
+
+  /* .masthead {
+    background-color: black !important;
+  } */
+
+  #headerMenu {
+    color: black;
+    padding-top: 2px;
+    padding-bottom: 0px;
+  }
+
+  #openSidebar {
+    float: left;
+  }
+
+  #title {
+    margin-top: 2px;
+  }
+
+  .ui.container {
+    margin-top: 120px;
+  }
+
+  #hire {
+    margin-top: 5px;
+  }
+
+  #profile {
+    margin-top: 14px;
+  }
+
+  #image {
+  }
+</style>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

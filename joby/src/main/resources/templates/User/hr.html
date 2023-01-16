@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu" id="sidebar">
+        <a th:href="@{/auth/}" class="item">
+            <i class="home icon"></i>
+            Home
+        </a>
+        <a th:if="${myUser.role=='HR'}" th:href="@{/hr/addJob}" class="item">
+            <i class="user plus icon"></i>
+            Hire
+        </a>
+        <a th:if="${myUser.role=='HR'}" th:href="@{/hr/manage}" class="item">
+            <i class="th icon"></i>
+            Manage Job
+        </a>
+        <a th:if="${myUser.role!=null}" th:href="@{/user/view}" class="item">
+            <i class="users icon"></i>
+            Applicants
+        </a>
+    </div>
+    <div class="dimmed pusher">
+      <div id="headerMenu" class="ui top inverted vertical masthead left aligned segment">
+        <div class="ui container black">
+          <div class="ui fixed inverted grey secondary menu" id="navBar">
+            <div id="openSidebar" class="ui item black vertical animated button" tabindex="0">
+                <div class="visible content">
+                    <i class="white bars icon"></i>
+                </div>
+                <div class="hidden content">
+                    Menu
+                </div>
+            </div>
+            <h2 class="header item">Applicant</h2>
+            <div class="right menu">
+              <div th:if="${myUser.id!=null}" class="item">
+                  <p th:text="${myUser.fullname}"></p>
+              </div>
+              <div th:if="${myUser.id!=null}" class="item">
+                  <a th:href="@{/auth/logout}">
+                      <div class="ui animated button" tabindex="0" id="lgn">
+                      <div class="visible content">Log Out</div>
+                      <div class="hidden content">
+                          <i class="arrow alternate circle right outline icon"></i>
+                      </div>
+                  </div></a>
+              </div>
+              <div th:if="${myUser.id==null}" class="item">
+                  <a th:href="@{/auth/login}">
+                      <div class="ui animated button" tabindex="0" id="lgn">
+                          <div class="visible content">Login</div>
+                          <div class="hidden content">
+                              <i class="user icon"></i>
+                          </div>
+                      </div>
+                  </a>
+              </div>                        
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="ui container body">
+        <h3 class="header">Profile</h3>
+        <div class="ui grid">
+          <div class="two wide column">
+              <img class="ui tiny circular image" src="https://semantic-ui.com/images/avatar2/small/matthew.png"/>
+          </div>
+          <div class="class fourteen wide column">
+              <p class="ui huge header" th:text="${myUser.fullname}"></p>
+              <p th:text="${myUser.email}"></p>
+              <p th:text="${myUser.phone}"></p>
+          </div>
+        </div>
+        <div class="ui divider"></div> -->
+
+
+        <div class="ui container body">
+          <th:block th:each="job : ${jobs}">
+              <div  class="ui raised segment">
+                  <h3 th:text="${job.position}"></h3>
+                  <h5 th:text="${job.company}" id="company"></h5>
+                  <i class="map marker alternate icon" id="icon"></i>
+                  <p th:text="${job.location}"></p>
+                  <i class="clock solid icon" id="icon"></i>
+                  <p th:text="${job.type}"></p>
+                  <i class="money bill alternate icon" id="icon"></i>
+                  <p id="salary" th:text="'Rp.' + ${job.minSalary} + ' - Rp.' + ${job.maxSalary}"></p>
+                  <a th:href="@{/discuss/show(id=${job.jobcode})}">
+                    <div class="ui blue animated button" tabindex="0" id="step">
+                        <div class="visible content"><i class="wechat icon"></i></div>
+                        <div class="hidden content">
+                          Chat
+                        </div>
+                    </div>
+                </a>
+                  <a th:href="@{'/user/detail?id=' + ${job.jobcode}}">
+                      <div class="ui blue animated button" tabindex="0" id="step">
+                          <div class="visible content"><i class="info circle icon"></i></div>
+                          <div class="hidden content">
+                            Detail
+                          </div>
+                      </div>
+                  </a>                  
+                  <br>
+              </div>
+          </th:block>
+        <br>
+        <br>
+      </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+  }
+
+  /* .masthead {
+    background-color: black !important;
+  } */
+
+  #sidebar {
+    background-color: #212429;
+  }
+
+  #navBar {
+    background-color: #212429;
+  }
+
+  #headerMenu {
+      color: black;
+      padding-top: 2px;
+      padding-bottom: 0px;
+  }
+
+  #lgn {
+        background-color: #3f4afa;
+        color: #ffffff;
+    }
+
+  #openSidebar {
+    float: left;
+  }
+
+  #title {
+    margin-top: 2px;
+  }
+
+  .ui.container {
+    margin-top: 120px;
+  }
+
+  #hire {
+    margin-top: 5px;
+  }
+
+  #profile {
+    margin-top: 14px;
+  }
+
+  #image {
+  }
+  #company {
+    margin-top: -10px;
+  }
+
+  #desc {
+    text-align: justify;
+  }
+
+  #icon {
+    float: left;
+  }
+
+  #salary {
+    float: left;
+  }
+
+  #step {
+    margin-top: -20px;
+    float: right;
+    background-color: #3f4afa;
+  }
+</style>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

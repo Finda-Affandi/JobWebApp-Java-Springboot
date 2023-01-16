@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <title>Job Details</title>
+  </head>
+  <body>
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+      <a th:href="@{/hr/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:href="@{/auth/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:href="@{/user/view}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div class="ui inverted vertical masthead left aligned segment">
+        <div
+          id="openSidebar"
+          class="ui black animated fade button"
+          tabindex="0">
+          <div class="visible content">
+            <i class="white bars icon"></i>
+          </div>
+          <div class="hidden content">Menu</div>
+        </div>
+        <h2 id="title">&nbsp&nbsp&nbsp Detail Job</h2>
+      </div>
+      <div class="ui container">
+        <div class="ui raised segment">
+          <h2 th:text="${job.position}"></h2>
+          <p th:text="${job.company}"></p>
+          <p th:text="'Location : ' + ${job.location}"></p>
+          <p
+            th:text="'Salary Range : ' + 'Rp.' + ${job.minSalary} + ' - ' + 'Rp.' + ${job.maxSalary}"></p>
+          <p th:text="'Type : ' + ${job.type}"></p>
+          <p th:text="'Status : ' + ${job.status}"></p>
+          <br />
+          <p th:text="${job.description}" id="desc"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+  }
+
+  #openSidebar {
+    float: left;
+  }
+
+  #title {
+    margin-top: 2px;
+  }
+
+  .ui.container {
+    margin-top: 50px;
+  }
+
+  #desc {
+    text-align: justify;
+  }
+</style>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

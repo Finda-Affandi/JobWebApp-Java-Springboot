@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/hr.manageJob.css}" />
+    <title>Job Management</title>
+  </head>
+  <body>
+    <div
+      class="ui left demo vertical inverted sidebar labeled icon menu"
+      id="sidebarMenu">
+      <a th:href="@{/auth/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:href="@{/user/view}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div
+        class="ui inverted vertical masthead left aligned segment"
+        id="navBar">
+        <div
+          id="openSidebar"
+          class="ui black vertical animated button"
+          tabindex="0">
+          <div class="visible content">
+            <i class="white bars icon"></i>
+          </div>
+          <div class="hidden content">Menu</div>
+        </div>
+        <h2 id="title">&nbsp&nbsp&nbsp Manage Job</h2>
+      </div>
+      <div class="ui container">
+        <div class="ui raised segment">
+          <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Job Code</th>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <th:block th:each="job : ${jobList}">
+                <tr>
+                  <td th:text="${job.jobcode}"></td>
+                  <td th:text="${job.company}"></td>
+                  <td th:text="${job.position}"></td>
+                  <td th:text="${job.type}"></td>
+                  <td th:text="${job.status}"></td>
+                  <td>
+                    <a th:href="@{/hr/detail(jobCode=${job.jobcode})}">
+                      <div class="ui blue animated button" tabindex="0">
+                        <div class="visible content">Detail</div>
+                        <div class="hidden content">
+                          <i class="eye icon"></i>
+                        </div>
+                      </div>
+                    </a>
+                    <a th:href="@{/hr/edit(jobCode=${job.jobcode})}">
+                      <div class="ui yellow animated button" tabindex="0">
+                        <div class="visible content">Edit</div>
+                        <div class="hidden content">
+                          <i class="pencil alternate icon"></i>
+                        </div>
+                      </div>
+                    </a>
+                    <a th:href="@{/hr/delete(jobCode=${job.jobcode})}">
+                      <div class="ui red animated button" tabindex="0">
+                        <div class="visible content">Delete</div>
+                        <div class="hidden content">
+                          <i class="trash alternate icon"></i>
+                        </div>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </th:block>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+      integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/hr.editJob.css}" />
+    <title>Job Management</title>
+  </head>
+  <body>
+    <div
+      class="ui left demo vertical inverted sidebar labeled icon menu"
+      id="sidebarMenu">
+      <a th:href="@{/auth/}" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a th:href="@{/hr/addJob}" class="item">
+        <i class="user plus icon"></i>
+        Hire
+      </a>
+      <a th:href="@{/hr/manage}" class="item">
+        <i class="th icon"></i>
+        Manage Job
+      </a>
+      <a th:href="@{/user/view}" class="item">
+        <i class="users icon"></i>
+        Applicants
+      </a>
+    </div>
+    <div class="dimmed pusher">
+      <div
+        class="ui inverted vertical masthead left aligned segment"
+        id="navBar">
+        <div
+          id="openSidebar"
+          class="ui black vertical animated button"
+          tabindex="0">
+          <div class="visible content">
+            <i class="white bars icon"></i>
+          </div>
+          <div class="hidden content">Menu</div>
+        </div>
+        <h2 id="title">&nbsp&nbsp&nbsp Edit</h2>
+      </div>
+      <div class="ui container">
+        <div class="ui raised segment">
+          <form
+            class="ui form"
+            th:action="@{/hr/doAddJob}"
+            method="post"
+            th:object="${job}">
+            <input type="hidden" th:field="*{jobcode}" />
+            <div class="field">
+              <label>Position</label>
+              <input
+                type="text"
+                placeholder="Position"
+                th:field="*{position}" />
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input
+                type="text"
+                placeholder="Location"
+                th:field="*{location}" />
+            </div>
+            <div class="field">
+              <label>Type</label>
+              <div class="ui radio">
+                <input
+                  type="radio"
+                  tabindex="0"
+                  class="hidden"
+                  th:field="*{type}"
+                  value="Full-Time" />
+                <label>Full-Time</label> &nbsp;&nbsp;
+                <input
+                  type="radio"
+                  tabindex="0"
+                  class="hidden"
+                  th:field="*{type}"
+                  value="Part-Time" />
+                <label>Part-Time</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Min Salary</label>
+              <input type="text" placeholder="Salary" th:field="*{minSalary}" />
+            </div>
+            <div class="field">
+              <label>Max Salary</label>
+              <input type="text" placeholder="Salary" th:field="*{maxSalary}" />
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <div class="ui radio">
+                <input
+                  type="radio"
+                  tabindex="0"
+                  class="hidden"
+                  th:field="*{status}"
+                  value="Open" />
+                <label>Open</label> &nbsp;&nbsp;
+                <input
+                  type="radio"
+                  tabindex="0"
+                  class="hidden"
+                  th:field="*{status}"
+                  value="Close" />
+                <label>Close</label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Description</label>
+              <textarea placeholder="Description" th:field="*{description}">
+              </textarea>
+            </div>
+            <button class="ui blue button" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $("#openSidebar").click(function () {
+    $(".ui.labeled.icon.sidebar").sidebar("toggle");
+  });
+</script>
