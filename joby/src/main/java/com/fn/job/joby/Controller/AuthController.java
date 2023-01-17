@@ -42,14 +42,17 @@ public class AuthController {
     @GetMapping(path = "doLogin")
     public String doLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String password) {
         User user = _userRepository.findUserByUsernameAndPassword(username, password);
-        if (user!=null) usrSingleton.value = user;
-        return "redirect:/auth/";
+        if (user!=null) {
+            usrSingleton.value = user;
+            return "redirect:/auth/";
+        }
+        return "redirect:/auth/login";
     }
 
     @RequestMapping(path = "logout")
     public String logOut(){
         usrSingleton.value=new User();
-        return "redirect:/auth/";
+        return "redirect:/auth/login";
     }
 
     @RequestMapping(path = "hrSignup")
