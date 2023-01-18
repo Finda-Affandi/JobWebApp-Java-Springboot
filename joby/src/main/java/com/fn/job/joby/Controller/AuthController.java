@@ -46,7 +46,7 @@ public class AuthController {
             usrSingleton.value = user;
             return "redirect:/auth/";
         }
-        return "redirect:/auth/login";
+        return "redirect:/auth/tes";
     }
 
     @RequestMapping(path = "logout")
