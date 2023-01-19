@@ -6,22 +6,26 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
       integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
+      referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
       integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
+      referrerpolicy="no-referrer"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
       integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
+      referrerpolicy="no-referrer"
+    />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" th:href="@{/css/auth.login.css}" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/auth.loginFailed.css}" />
     <title>Login</title>
   </head>
   <body>
@@ -36,6 +40,7 @@
           <h1 id="h1">Hello Welcome!</h1>
           <p id="let">Let's find a suitable job and be around you</p>
 
+          <p id="wrong"><b>Wrong username or password!</b></p>
           <form class="ui form" method="get" th:action="@{/auth/doLogin}">
             <div class="field">
               <div class="ui large icon input" id="input">
@@ -83,7 +88,8 @@
                 </div>
               </div>
               <img
-                src="https://semantic-ui.com/images/avatar2/large/kristy.png" />
+                src="https://semantic-ui.com/images/avatar2/large/kristy.png"
+              />
             </div>
             <div class="content">
               <a th:href="@{/auth/hrSignup}" class="header"
@@ -103,7 +109,8 @@
                 </div>
               </div>
               <img
-                src="https://semantic-ui.com/images/avatar2/large/matthew.png" />
+                src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+              />
             </div>
             <div class="content">
               <a th:href="@{/auth/userSignup}" class="header"
